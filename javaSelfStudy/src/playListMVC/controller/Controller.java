@@ -4,10 +4,17 @@ import playListMVC.entity.MySong;
 import playListMVC.model.SongRepository;
 import playListMVC.view.View;
 
-import java.util.Vector;
-
 public class Controller {
-
+//    View view;
+//    SongRepository songRepo;
+//
+//    Controller() {
+//        this.view = new View();
+//        this.songRepo = new SongRepository();
+//    }
+// m(repo) 데이터 가공 및 관리, c m(repo)과 view 연결, v 입출력
+    
+    
     public void run() {
 
         View.startPlayList();
@@ -48,6 +55,7 @@ public class Controller {
         SongRepository.add(new MySong(mySong.getName(), mySong.getArtist(), mySong.getType()));
 
         View.enter();
+
         return String.valueOf(mySong);
     }
 
@@ -62,17 +70,9 @@ public class Controller {
         switch (View.deleteMenu()) {
             case 1:
                 SongRepository.deleteAllSong();
-                View.deleteAllList();
                 break;
             case 2:
                 SongRepository.deleteSong(View.deleteSongName());
-
-                if() {
-                    View.deleteSongComplete();
-                } else {
-                    View.noSong();
-                }
-
                 break;
             default:
                 View.restartMenu();
@@ -84,73 +84,22 @@ public class Controller {
 
     private static void searchList() {
 
-//        System.out.println("🔎 플레이 리스트에서 검색하고 싶은 옵션을 선택해주세요. ");
-//        System.out.println("1. 곡명으로 검색");
-//        System.out.println("2. 가수명으로 검색");
-//        System.out.println("3. 장르로 검색");
-//
-//        int choice = sc.nextInt();
-//        System.out.println("======================================");
-//        sc.nextLine();
-//
-//        switch (choice) {
-//            case 1:
-//                System.out.println("🏷️ 곡명을 입력하세요.");
-//                String name = sc.nextLine();
-//                System.out.println();
-//                int cnt1 = 0;
-//
-//                for (Song song : lists) {
-//                    if (song.getName().equals(name)) {
-//                        System.out.println(song);
-//                        cnt1++;
-//                    }
-//                }
-//
-//                if (cnt1 == 0) {
-//                    System.out.println("❗ 플레이 리스트에 해당 곡이 존재하지 않습니다. ");
-//                }
-//
-//                break;
-//            case 2:
-//                System.out.println("🏷️ 가수를 입력하세요.");
-//                String artist = sc.nextLine();
-//                System.out.println();
-//                int cnt2 = 0;
-//
-//                for (Song song : lists) {
-//                    if (song.getArtist().equals(artist)) {
-//                        System.out.println(song);
-//                        cnt2++;
-//                    }
-//                }
-//
-//                if (cnt2 == 0) {
-//                    System.out.println("❗ 플레이 리스트에 해당 곡이 존재하지 않습니다. ");
-//                }
-//                break;
-//            case 3:
-//                System.out.println("🏷️ 장르를 입력하세요.");
-//                String type = sc.nextLine();
-//                System.out.println();
-//                int cnt3 = 0;
-//
-//                for (Song song : lists) {
-//                    if (song.getType().equals(type)) {
-//                        System.out.println(song);
-//                        cnt3++;
-//                    }
-//                }
-//
-//                if (cnt3 == 0) {
-//                    System.out.println("❗ 플레이 리스트에 해당 곡이 존재하지 않습니다. ");
-//                }
-//                break;
-//            default:
-//                System.out.println("⚠️ 메뉴를 다시 선택해주십시오. ");
-//                break;
-//        }
-//
-//        System.out.println("======================================");
+        switch (View.searchList()) {
+            case 1:
+                View.searchNameIf(SongRepository.findSongName(View.searchListName()));
+                break;
+            case 2:
+                View.searchArtistIf(SongRepository.findSongArtist(View.searchListArtist()));
+                break;
+            case 3:
+                View.searchTypeIf(SongRepository.findSongType(View.searchListType()));
+                break;
+            default:
+                View.restartMenu();
+                break;
+        }
+
+        View.line();
     }
+
 }

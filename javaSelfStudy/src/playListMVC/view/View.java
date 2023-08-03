@@ -3,6 +3,7 @@ package playListMVC.view;
 import playListMVC.controller.Controller;
 import playListMVC.entity.MySong;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class View {
@@ -97,6 +98,73 @@ public class View {
 
     public static void deleteSongComplete() {
         System.out.println("❗ 해당 곡이 삭제 되었습니다. ");
+    }
+
+    public static int searchList() {
+        System.out.println("🔎 플레이 리스트에서 검색하고 싶은 옵션을 선택해주세요. ");
+        System.out.println("1. 곡명으로 검색");
+        System.out.println("2. 가수명으로 검색");
+        System.out.println("3. 장르로 검색");
+
+        int choice = sc.nextInt();
+        System.out.println("======================================");
+        sc.nextLine();
+
+        return choice;
+    }
+
+    public static String searchListName() {
+        System.out.println("🏷️ 곡명을 입력하세요.");
+        String name = sc.nextLine();
+        System.out.println();
+
+        return name;
+    }
+
+    public static String searchListArtist() {
+        System.out.println("🏷️ 가수를 입력하세요.");
+        String artist = sc.nextLine();
+        System.out.println();
+
+        return artist;
+    }
+
+    public static String searchListType() {
+        System.out.println("🏷️ 장르를 입력하세요.");
+        String type = sc.nextLine();
+        System.out.println();
+
+        return type;
+    }
+
+    public static void searchNameIf(ArrayList<MySong> saveName) {
+        if(saveName.size() != 0) {
+            for(MySong saveNameList : saveName) {
+                System.out.println(saveNameList);
+            }
+        } else {
+            View.noSong();
+        }
+    }
+
+    public static void searchArtistIf(ArrayList<MySong> saveArtist) {
+        if(saveArtist.size() != 0) {
+            for(MySong saveArtistList : saveArtist) {
+                System.out.println(saveArtistList);
+            }
+        } else {
+            View.noSong();
+        }
+    }
+
+    public static void searchTypeIf(ArrayList<MySong> saveType) {
+        if(saveType.size() != 0) {
+            for(MySong saveTypeList : saveType) {
+                System.out.println(saveTypeList);
+            }
+        } else {
+            View.noSong();
+        }
     }
 
     public static void noSong() {
